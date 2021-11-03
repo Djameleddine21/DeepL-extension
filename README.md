@@ -1,16 +1,13 @@
-# deepl_extension
+# DeepL Extension
 
-A new Flutter project.
+This is an extension with flutter web, usefel when copy text from PDF and the text have a lot of '\n' and it will show a duplicate words because of that, So with this extension we can remove those back line.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Create a copy on your laptop ?
+- fork the repo
+- Run : 
+```dart
+flutter pub get
+flutter build web --web-renderer html --csp
+```
+- On your build/web go to index.html file and add this style to the html tag :
+> html style="height: 600px; width: 400px"
