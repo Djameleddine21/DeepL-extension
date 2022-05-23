@@ -53,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               TextField(
                 decoration: const InputDecoration(hintText: "Paste your text here"),
+                autofocus: true,
                 onSubmitted: (value) {
                   setState(() {
                     _text = value;
