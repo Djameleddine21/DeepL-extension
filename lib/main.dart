@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,26 +35,50 @@ class _MyHomePageState extends State<MyHomePage> {
     return _text?.split('\n').toList().join();
   }
 
+  void _copyToClipboard() async {
+    await Clipboard.setData(ClipboardData(text: _getText()!));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(hintText: "Paste your text here"),
-              onSubmitted: (value) {
-                setState(() {
-                  _text = value;
-                  _showText = true;
-                });
-              },
-            ),
-            const SizedBox(height: 20.0),
-            _showText ? SelectableText(_getText()!) : const SizedBox.shrink(),
-          ],
+      body: SizedBox(
+        height: 600.0,
+        width: 400.0,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                decoration: const InputDecoration(hintText: "Paste your text here"),
+                onSubmitted: (value) {
+                  setState(() {
+                    _text = value;
+                    _showText = true;
+                    _copyToClipboard();
+                  });
+                },
+              ),
+              const SizedBox(height: 16.0),
+              _showText
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: ElevatedButton(
+                            child: const Text("Copy to clipboard"),
+                            onPressed: _copyToClipboard,
+                          ),
+                        ),
+                        const SizedBox(height: 16.0),
+                        SelectableText(_getText()!),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          ),
         ),
       ),
     );
