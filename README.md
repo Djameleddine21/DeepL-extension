@@ -4,11 +4,6 @@ This is an extension with flutter web, usefel when copy text from PDF and the te
 
 ## Create a copy on your laptop ?
 
-- fork the repo
-- Run :
-
-=======
-
 - Clone the repo
 - Run :
 
